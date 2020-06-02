@@ -1,15 +1,14 @@
 name: Dependencies
 
-on:
-  push:
-    branches: [ master ]
-    tags:        
-      - v1  
+runs:
+  using: "linux"
      
 jobs:
   build:
     # Job name is Greeting
     name: Dependencies
+    # This job runs on Linux
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
