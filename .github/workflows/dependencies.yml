@@ -17,6 +17,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
    
+     - name: Set Envitonment Variables
+        run: echo ::set-env azmonRG="azmon-rg"::$(echo $azmonRG)
+        run: echo ::set-env customerCode="pvdv"::$(echo $customerCode)
+        run: echo ::set-env locationShortName="weu"::$(echo $locationShortName)
+
       - name: Login Azure
         uses: azure/login@v1.1
         with:

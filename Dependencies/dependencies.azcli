@@ -1,4 +1,4 @@
 az group create --location westeurope --name 'azmon-rg'
-az deployment group create --name 'logAnalyticsWorkspaceDeployment' --resource-group 'azmon-rg' --template-file .\LogAnalyticsWorkspace.json --parameters customerCode="pvdv" locationShortName="weu" 
+az deployment group validate --name 'logAnalyticsWorkspaceDeployment' --resource-group 'azmon-rg' --template-file .\LogAnalyticsWorkspace.json --parameters customerCode="pvdv" locationShortName="weu" --verbose
 
 az ad sp create-for-rbac --name "GitHubApp" --role contributor --scopes /subscriptions/77e8d024-7b64-4cf7-85cc-c3b2fdeed610 --sdk-auth
