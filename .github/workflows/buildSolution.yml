@@ -7,14 +7,14 @@ on:
       - v1  
      
 jobs:
-env:  
-  azmonRG: azmon-rg
-  customerCode: pvdv
-  locationShortName: weu
   
   Dependencies:
         name: Dependencies
         runs-on: ubuntu-latest
+        env:  
+          azmonRG: azmon-rg
+          customerCode: pvdv
+          locationShortName: weu
 
         steps:
           - name: Checkout repository
@@ -39,11 +39,11 @@ env:
               name: Dependencies
               path: Dependencies/
               
-        Alerts:
-          name: Alerts
-          runs-on: ubuntu-latest
+  Alerts:
+    name: Alerts
+    runs-on: ubuntu-latest
 
-          steps:
-            - name: Output Variables
-              run: echo Alerts ResouceGroup $azmonRG customerCode $customerCode locationShortName $locationShortName
+    steps:
+      - name: Output Variables
+        run: echo Alerts ResouceGroup $azmonRG customerCode $customerCode locationShortName $locationShortName
 
