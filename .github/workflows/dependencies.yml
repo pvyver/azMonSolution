@@ -24,7 +24,7 @@ jobs:
 
       - name: Deploy Log Analytics Workspace
         run: |
-            az deployment group create --name 'logAnalyticsWorkspaceDeployment' --resource-group 'azmon-rg' --template-file Dependencies/LogAnalyticsWorkspace.json --parameters customerCode="pvdv" locationShortName="weu" 
+            az deployment group verify --name 'logAnalyticsWorkspaceDeployment' --resource-group 'azmon-rg' --template-file Dependencies/LogAnalyticsWorkspace.json --parameters customerCode="pvdv" locationShortName="weu" 
 
       - name: Upload Dependency Artifacts
         uses: actions/upload-artifact@v1
