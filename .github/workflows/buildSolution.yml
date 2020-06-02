@@ -5,12 +5,13 @@ on:
     branches: [ master ]
     tags:        
       - v1  
-     
-jobs:
+
 env:  
-azmonRG: azmon-rg
-customerCode: pvdv
-locationShortName: weu
+  azmonRG: azmon-rg
+  customerCode: pvdv
+  locationShortName: weu
+
+jobs:
   
   Dependencies:
         name: Dependencies
