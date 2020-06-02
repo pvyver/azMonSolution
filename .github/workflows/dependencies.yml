@@ -17,6 +17,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
         
+    - uses: azure/login@v1.1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    
+    - run: |
+        az deployment group create --name 'logAnalyticsWorkspaceDeployment' --resource-group 'azmon-rg' --template-file .\LogAnalyticsWorkspace.json --parameters customerCode="pvdv" locationShortName="weu" 
+
+
       - name: Upload Dependency Artifacts
         uses: actions/upload-artifact@v1
         with:
