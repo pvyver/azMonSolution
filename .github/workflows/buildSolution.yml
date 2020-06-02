@@ -12,7 +12,7 @@ env:
   customerCode: pvdv
   locationShortName: weu
   
-    job1:
+  Dependencies:
         name: Dependencies
         runs-on: ubuntu-latest
 
@@ -39,11 +39,11 @@ env:
               name: Dependencies
               path: Dependencies/
               
-      job2:
-        name: Alerts
-        runs-on: ubuntu-latest
+        Alerts:
+          name: Alerts
+          runs-on: ubuntu-latest
 
-        steps:
-          - name: Output Variables
-            run: echo Alerts ResouceGroup $azmonRG customerCode $customerCode locationShortName $locationShortName
+          steps:
+            - name: Output Variables
+              run: echo Alerts ResouceGroup $azmonRG customerCode $customerCode locationShortName $locationShortName
 
