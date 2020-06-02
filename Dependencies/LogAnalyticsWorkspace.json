@@ -1,0 +1,67 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "customerCode": {
+        "type": "string"
+      },
+      "resourceTags": {
+        "type": "object",
+        "defaultValue": {
+             "Description": "Azure Monitor Environment"
+        }
+      },
+      "workspacePricingTier": {
+        "type": "string",
+        "defaultValue": "pergb2018",
+        "allowedValues": [
+          "pergb2018"
+        ],
+        "metadata": {
+          "description": "Pricing tier: perGB2018 or legacy tiers (Free, Standalone, PerNode, Standard or Premium) which are not available to all customers."
+        }
+      },
+      "workspaceDataRetention": {
+        "type": "int",
+        "defaultValue": 30,
+        "minValue": 7,
+        "maxValue": 730,
+        "metadata": {
+          "description": "Number of days of retention. Workspaces in the legacy Free pricing tier can only have 7 days."
+        }
+      },
+      "location": {
+        "type": "string",
+        "defaultValue": "[resourceGroup().location]",
+        "metadata": {
+          "description": "Location"
+        }
+      },
+      "locationShortName": {
+        "type": "string",
+        "metadata": {
+          "description": "Location Short Name (weu, neu, ...)"
+        }
+      }
+    },
+    "variables": {
+      "workspaceName": "[toLower(concat('log-', parameters('customerCode'),'-', parameters('locationShortName'),'-x-001'))]"
+    },
+    "resources": [
+      {
+        "type": "Microsoft.OperationalInsights/workspaces",
+        "name": "[variables('workspaceName')]",
+        "apiVersion": "2017-03-15-preview",
+        "location": "[parameters('location')]",
+        "tags": "[parameters('resourceTags')]",
+        "properties": {
+          "sku": {
+            "name": "[parameters('workspacePricingTier')]"
+          },
+          "retentionInDays": "[parameters('workspaceDataRetention')]"
+        }
+      }
+    ],
+    "outputs": {
+    }
+  }
