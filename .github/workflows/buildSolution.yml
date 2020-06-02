@@ -7,14 +7,14 @@ on:
       - v1  
      
 jobs:
+env:  
+azmonRG: azmon-rg
+customerCode: pvdv
+locationShortName: weu
   
   Dependencies:
         name: Dependencies
         runs-on: ubuntu-latest
-        env:  
-          azmonRG: azmon-rg
-          customerCode: pvdv
-          locationShortName: weu
 
         steps:
           - name: Checkout repository
