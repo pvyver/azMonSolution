@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     # Job name is Greeting
-    name: Greeting
+    name: Dependencies
     # This job runs on Linux
     runs-on: ubuntu-latest
 
@@ -22,9 +22,9 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Login Azure
+      - name: Deploy Log Analytics Workspace
         run: |
-            az deployment group create --name 'logAnalyticsWorkspaceDeployment' --resource-group 'azmon-rg' --template-file .\LogAnalyticsWorkspace.json --parameters customerCode="pvdv" locationShortName="weu" 
+            az deployment group create --name 'logAnalyticsWorkspaceDeployment' --resource-group 'azmon-rg' --template-file Dependencies/LogAnalyticsWorkspace.json --parameters customerCode="pvdv" locationShortName="weu" 
 
       - name: Upload Dependency Artifacts
         uses: actions/upload-artifact@v1
