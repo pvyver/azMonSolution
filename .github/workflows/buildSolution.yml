@@ -1,18 +1,40 @@
-name: Build Azure Monitor Solution
+name: Dependencies
 
 on:
   push:
     branches: [ master ]
     tags:        
       - v1  
-
+     
 jobs:
   build:
+    # Job name is Greeting
+    name: Dependencies
+    # This job runs on Linux
     runs-on: ubuntu-latest
+
     steps:
-      # This step checks out a copy of your repository.
-      - uses: actions/checkout@v2
-      # This step references the directory that contains the action.
-      - uses: ./.github/actions/build/dependencies
-        with: 
+      - name: Checkout repository
+        uses: actions/checkout@v2
+  
+      - name: Set Environment Variables
+        run: echo ResouceGroup $azmonRG customerCode $customerCode locationShortName $locationShortName!
+        env:
+          azmonRG: azmon-r
+          customerCode: pvdv
+          locationShortName: weu
+
+      - name: Login Azure
+        uses: azure/login@v1.1
+        with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy Log Analytics Workspace
+        run: |
+            az deployment group validate --name 'logAnalyticsWorkspaceDeployment' --resource-group 'azmon-rg' --template-file Dependencies/LogAnalyticsWorkspace.json --parameters customerCode="pvdv" locationShortName="weu" 
+
+      - name: Upload Dependency Artifacts
+        uses: actions/upload-artifact@v1
+        with:
+          name: Dependencies
+          path: Dependencies/
