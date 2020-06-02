@@ -8,9 +8,7 @@ on:
      
 jobs:
   build:
-    # Job name is Greeting
     name: Dependencies
-    # This job runs on Linux
     runs-on: ubuntu-latest
 
     steps:
@@ -38,3 +36,10 @@ jobs:
         with:
           name: Dependencies
           path: Dependencies/
+
+    name: Alerts
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
