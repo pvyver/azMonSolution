@@ -16,7 +16,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - name: Archive production artifacts
+        
+      - name: Upload Dependency Artifacts
         uses: actions/upload-artifact@v1
         with:
           name: Dependencies
