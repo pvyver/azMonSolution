@@ -12,7 +12,7 @@ env:
   customerCode: pvdv
   locationShortName: weu
   
-    Dependencies:
+    job1:
         name: Dependencies
         runs-on: ubuntu-latest
 
@@ -39,7 +39,7 @@ env:
               name: Dependencies
               path: Dependencies/
               
-      Alerts:
+      job2:
         name: Alerts
         runs-on: ubuntu-latest
 
