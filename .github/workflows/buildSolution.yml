@@ -10,6 +10,10 @@ jobs:
   build:
     name: Dependencies
     runs-on: ubuntu-latest
+    env:  
+      azmonRG: azmon-rg
+      customerCode: pvdv
+      locationShortName: weu
 
     steps:
       - name: Checkout repository
@@ -17,10 +21,7 @@ jobs:
   
       - name: Set Environment Variables
         run: echo ResouceGroup $azmonRG customerCode $customerCode locationShortName $locationShortName!
-        env:
-          azmonRG: azmon-rg
-          customerCode: pvdv
-          locationShortName: weu
+
 
       - name: Login Azure
         uses: azure/login@v1.1
@@ -29,7 +30,7 @@ jobs:
 
       - name: Deploy Log Analytics Workspace
         run: |
-            az deployment group validate --name 'logAnalyticsWorkspaceDeployment' --resource-group ${{ azmonRG }} --template-file Dependencies/LogAnalyticsWorkspace.json --parameters customerCode=${{ customerCode }} locationShortName=${{ locationShortName }} 
+            az deployment group validate --name 'logAnalyticsWorkspaceDeployment' --resource-group $azmonRG --template-file Dependencies/LogAnalyticsWorkspace.json --parameters customerCode=$customerCode locationShortName=$locationShortName 
 
       - name: Upload Dependency Artifacts
         uses: actions/upload-artifact@v1
