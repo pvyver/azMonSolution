@@ -29,7 +29,7 @@ jobs:
 
       - name: Deploy Log Analytics Workspace
         run: |
-            az deployment group validate --name 'logAnalyticsWorkspaceDeployment' --resource-group $azmonRG --template-file Dependencies/LogAnalyticsWorkspace.json --parameters customerCode=$customerCode locationShortName=$locationShortName 
+            az deployment group validate --name 'logAnalyticsWorkspaceDeployment' --resource-group ${{ azmonRG }} --template-file Dependencies/LogAnalyticsWorkspace.json --parameters customerCode=${{ customerCode }} locationShortName=${{ locationShortName }} 
 
       - name: Upload Dependency Artifacts
         uses: actions/upload-artifact@v1
