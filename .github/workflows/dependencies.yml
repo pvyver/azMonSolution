@@ -14,12 +14,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # This step uses GitHub's hello-world-javascript-action: https://github.com/actions/hello-world-javascript-action
-      - name: Hello world
-        uses: actions/hello-world-javascript-action@v1
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v1
         with:
-          who-to-greet: 'Mona'
-        id: hello
-      # This step prints an output (time) from the previous step's action.
-      - name: Echo the greeting's time
-        run: echo 'The time was ${{ steps.hello.outputs.time }}.'
+          name: dependencies
+          path: dependencies/
