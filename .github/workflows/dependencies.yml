@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v2
   
       - name: Set Environment Variables
-        run: echo Hello world $azmonRG $customerCode $locationShortName!
+        run: echo ResouceGroup $azmonRG customerCode $customerCode locationShortName $locationShortName!
         env:
           azmonRG: azmon-r
           customerCode: pvdv
