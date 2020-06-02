@@ -7,33 +7,43 @@ on:
       - v1  
      
 jobs:
-  build:
-    name: Dependencies
-    runs-on: ubuntu-latest
-    env:  
-      azmonRG: azmon-rg
-      customerCode: pvdv
-      locationShortName: weu
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+env:  
+  azmonRG: azmon-rg
+  customerCode: pvdv
+  locationShortName: weu
   
-      - name: Output Variables
-        run: echo ResouceGroup $azmonRG customerCode $customerCode locationShortName $locationShortName
+    Dependencies:
+        name: Dependencies
+        runs-on: ubuntu-latest
+
+        steps:
+          - name: Checkout repository
+            uses: actions/checkout@v2
+
+          - name: Output Variables
+            run: echo ResouceGroup $azmonRG customerCode $customerCode locationShortName $locationShortName
 
 
-      - name: Login Azure
-        uses: azure/login@v1.1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          - name: Login Azure
+            uses: azure/login@v1.1
+            with:
+              creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Deploy Log Analytics Workspace
-        run: |
-            az deployment group validate --name 'logAnalyticsWorkspaceDeployment' --resource-group $azmonRG --template-file Dependencies/LogAnalyticsWorkspace.json --parameters customerCode=$customerCode locationShortName=$locationShortName 
+          - name: Deploy Log Analytics Workspace
+            run: |
+                az deployment group validate --name 'logAnalyticsWorkspaceDeployment' --resource-group $azmonRG --template-file Dependencies/LogAnalyticsWorkspace.json --parameters customerCode=$customerCode locationShortName=$locationShortName 
 
-      - name: Upload Dependency Artifacts
-        uses: actions/upload-artifact@v1
-        with:
-          name: Dependencies
-          path: Dependencies/
+          - name: Upload Dependency Artifacts
+            uses: actions/upload-artifact@v1
+            with:
+              name: Dependencies
+              path: Dependencies/
+              
+      Alerts:
+        name: Alerts
+        runs-on: ubuntu-latest
+
+        steps:
+          - name: Output Variables
+            run: echo Alerts ResouceGroup $azmonRG customerCode $customerCode locationShortName $locationShortName
+
