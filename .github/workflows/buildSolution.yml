@@ -1,3 +1,11 @@
+name: Build Azure Monitor Solution
+
+on:
+  push:
+    branches: [ master ]
+    tags:        
+      - v1  
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -5,4 +13,4 @@ jobs:
       # This step checks out a copy of your repository.
       - uses: actions/checkout@v2
       # This step references the directory that contains the action.
-      - uses: ./.github/actions/hello-world-action
+      - uses: ./.github/actions/build/dependencies
