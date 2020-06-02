@@ -19,8 +19,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
   
-      - name: Set Environment Variables
-        run: echo ResouceGroup $azmonRG customerCode $customerCode locationShortName $locationShortName!
+      - name: Output Variables
+        run: echo ResouceGroup $azmonRG customerCode $customerCode locationShortName $locationShortName
 
 
       - name: Login Azure
